@@ -22,14 +22,14 @@ export default {
     const jwt =
       'eyJpZCI6MSwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqb2huQG1haWwuY29tIiwicm9sZSI6ImFkbWluIn0';
 
-    commit(TYPES.SET_STATE, { accessor: 'token', value: jwt });
-    commit(TYPES.SET_STATE, { accessor: 'userData', value: dummyUser });
-
     Storage.setStorage(TYPES.TOKEN_NAME, base64Encode(jwt));
     Storage.setStorage(
       TYPES.USER_DATA_NAME,
       base64Encode(qs.stringify(dummyUser))
     );
+
+    commit(TYPES.SET_STATE, { accessor: 'token', value: jwt });
+    commit(TYPES.SET_STATE, { accessor: 'userData', value: dummyUser });
   },
 
   [TYPES.FETCH_LOGOUT]({ commit }, payload) {
