@@ -1,0 +1,10 @@
+{
+  "env": {
+    "environment": "develop",
+    "hostname": "https://dev-sentinel.dolphin.web.id",
+    "apiBaseUrl": "https://api-dev-sentinel.dolphin.web.id",
+    "meta": {
+      "title": "Sentinel"
+    }
+  }
+}

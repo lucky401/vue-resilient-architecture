@@ -1,0 +1,10 @@
+{
+  "env": {
+    "environment": "production",
+    "hostname": "https://sentinel.dolphin.web.id",
+    "apiBaseUrl": "https://api-sentinel.dolphin.web.id",
+    "meta": {
+      "title": "Sentinel"
+    }
+  }
+}
