@@ -1,18 +1,18 @@
 <template>
   <authLayout>
-    <login />
+    <login-component />
   </authLayout>
 </template>
 
 <script>
-import authLayout from '@/layouts/auth.layout';
+import AuthLayout from '@/layouts/Auth';
 
-import login from '@/modules/login/login.component';
+import LoginComponent from '@/modules/login/Login';
 
 export default {
   components: {
-    authLayout,
-    login,
+    AuthLayout,
+    LoginComponent,
   },
 };
 </script>

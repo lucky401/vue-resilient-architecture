@@ -1,18 +1,18 @@
 <template>
   <general-layout>
-    <home />
+    <home-component />
   </general-layout>
 </template>
 
 <script>
-import generalLayout from '@/layouts/general.layout';
+import GeneralLayout from '@/layouts/General';
 
-import home from '@/modules/home/home.component';
+import HomeComponent from '@/modules/home/Home';
 
 export default {
   components: {
-    generalLayout,
-    home,
+    GeneralLayout,
+    HomeComponent,
   },
 };
 </script>

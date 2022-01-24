@@ -3,11 +3,11 @@ const Home = () =>
 
 const routes = [
   {
-    path: '/home',
-    name: 'home',
+    path: '/summary',
+    name: 'summary',
     component: Home,
     meta: {
-      title: 'Home',
+      title: 'Summary',
     },
   },
 ];

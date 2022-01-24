@@ -1,11 +1,21 @@
 <template>
-  <v-sheet class="d-flex flex-column justify-space-around">
-    <v-img contain class="mx-auto" :src="require('@/assets/logo.svg')" />
-    <v-card width="90%" max-width="408" class="my-4 mx-auto">
-      <v-card-text>
+  <fragment>
+    <v-img
+      contain
+      class="mx-auto mb-4"
+      width="150"
+      height="150"
+      :src="require('@/assets/logo.svg')"
+    />
+    <h1 class="text-h4 accent--text font-weight-bold text-center my-1">
+      SENTINEL
+    </h1>
+    <p class="body-2 mb-8 accent--text text-center">Admin Panel</p>
+    <v-card width="90%" max-width="408" class="mx-auto" flat outlined>
+      <v-card-text class="pt-4">
         <ValidationObserver ref="observer">
-          <v-form class="text-left mb-6" :readonly="isLoading">
-            <p class="body-2 mb-2">Email</p>
+          <v-form :readonly="isLoading">
+            <p class="body-2 mb-2 secondary--text">Email</p>
             <ValidationProvider
               name="Email"
               rules="required|email"
@@ -21,7 +31,7 @@
               >
               </v-text-field>
             </ValidationProvider>
-            <p class="body-2 mb-2">Password</p>
+            <p class="body-2 mb-2 secondary--text">Password</p>
             <ValidationProvider
               name="Password"
               rules="required|max:20"
@@ -44,20 +54,23 @@
         <div class="text-center mt-4 mb-4">
           <v-btn
             block
-            color="primary"
+            elevation="0"
+            color="secondary darken-2"
             :loading="isLoading"
             @click="loginHandler"
-            class="text-capitalize"
+            rounded
           >
             Login
           </v-btn>
         </div>
       </v-card-text>
     </v-card>
-  </v-sheet>
+  </fragment>
 </template>
 
 <script>
+import { Fragment } from 'vue-fragment';
+
 import VuexModule from '@/utils/vuex';
 
 import * as AUTHENTICATIONTYPES from '@/store-namespace/authentication/types';
@@ -65,6 +78,10 @@ import * as AUTHENTICATIONTYPES from '@/store-namespace/authentication/types';
 const authenticationModule = VuexModule(AUTHENTICATIONTYPES.MODULE_NAME);
 
 export default {
+  components: {
+    Fragment,
+  },
+
   data() {
     return {
       showPassword: false,
@@ -75,6 +92,7 @@ export default {
       isLoading: false,
     };
   },
+
   methods: {
     ...authenticationModule.mapActions({
       fetchLogin: AUTHENTICATIONTYPES.FETCH_LOGIN,
@@ -85,7 +103,7 @@ export default {
       if (isValid) {
         try {
           await this.fetchLogin();
-          this.$router.push({ name: 'home' });
+          this.$router.push({ name: 'summary' });
         } catch (e) {
           return;
         }
