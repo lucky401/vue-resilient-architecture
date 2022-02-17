@@ -8,7 +8,7 @@
         style="min-height: 100vh"
       >
         <v-col cols="12">
-          <slot />
+          <router-view />
         </v-col>
       </v-row>
     </v-container>

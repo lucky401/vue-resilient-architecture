@@ -27,6 +27,7 @@
                 autofocus
                 dense
                 outlined
+                color="info"
                 placeholder="Email"
               >
               </v-text-field>
@@ -42,6 +43,7 @@
                 :error-messages="errors"
                 dense
                 outlined
+                color="info"
                 placeholder="Password"
                 :type="showPassword ? 'text' : 'password'"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -69,7 +71,7 @@
 </template>
 
 <script>
-import { Fragment } from 'vue-fragment';
+import { Fragment } from 'vue-frag';
 
 import VuexModule from '@/utils/vuex';
 
@@ -103,7 +105,7 @@ export default {
       if (isValid) {
         try {
           await this.fetchLogin();
-          this.$router.push({ name: 'summary' });
+          this.$router.push({ name: 'home' });
         } catch (e) {
           return;
         }

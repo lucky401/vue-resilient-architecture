@@ -5,6 +5,7 @@
     fixed
     :permanent="!isMobile"
     color="secondary darken-2"
+    width="230"
   >
     <v-list-item to="/">
       <v-list-item-content>
@@ -23,10 +24,12 @@
       </v-list-item-content>
     </v-list-item>
 
-    <v-list nav class="px-0">
-      <v-subheader class="secondary--text">LISTEN</v-subheader>
+    <v-list nav class="px-0" v-for="groupMenu in items" :key="groupMenu.name">
+      <v-subheader class="secondary--text text-capitalize">
+        {{ groupMenu.name }}
+      </v-subheader>
       <v-list-item
-        v-for="item in items"
+        v-for="item in groupMenu.items"
         :key="item.title"
         :to="item.path"
         exact
@@ -45,10 +48,29 @@
         </v-list-item-content>
       </v-list-item>
     </v-list>
+
+    <template v-slot:append>
+      <v-list nav class="px-0">
+        <v-list-item @click="logoutHandler">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title> Logout </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script>
+import VuexModule from '@/utils/vuex';
+
+import * as AUTHENTICATIONTYPES from '@/store-namespace/authentication/types';
+
+const authenticationModule = VuexModule(AUTHENTICATIONTYPES.MODULE_NAME);
+
 export default {
   props: {
     value: {
@@ -61,8 +83,16 @@ export default {
     return {
       innerValue: false,
       items: [
-        { title: 'Summary', icon: 'mdi-view-dashboard', path: '/summary' },
-        { title: 'Keywords', icon: 'mdi-poll', path: '/' },
+        {
+          name: 'General',
+          items: [
+            {
+              title: 'Home',
+              icon: 'mdi-text-box-multiple-outline',
+              path: '/home',
+            },
+          ],
+        },
       ],
     };
   },
@@ -85,6 +115,21 @@ export default {
 
   mounted() {
     this.innerValue = this.value;
+  },
+
+  methods: {
+    ...authenticationModule.mapActions({
+      fetchLogout: AUTHENTICATIONTYPES.FETCH_LOGOUT,
+    }),
+
+    async logoutHandler() {
+      try {
+        await this.fetchLogout();
+        this.$router.push({ name: 'login' });
+      } catch (e) {
+        return;
+      }
+    },
   },
 };
 </script>

@@ -76,6 +76,12 @@
 </template>
 
 <script>
+import VuexModule from '@/utils/vuex';
+
+import * as AUTHENTICATIONTYPES from '@/store-namespace/authentication/types';
+
+const authenticationModule = VuexModule(AUTHENTICATIONTYPES.MODULE_NAME);
+
 export default {
   computed: {
     isBreakpointXS() {
@@ -83,8 +89,17 @@ export default {
     },
   },
   methods: {
-    logoutHandler() {
-      throw new Error('Method not implemented.');
+    ...authenticationModule.mapActions({
+      fetchLogout: AUTHENTICATIONTYPES.FETCH_LOGOUT,
+    }),
+
+    async logoutHandler() {
+      try {
+        await this.fetchLogout();
+        this.$router.push({ name: 'login' });
+      } catch (e) {
+        return;
+      }
     },
   },
 };

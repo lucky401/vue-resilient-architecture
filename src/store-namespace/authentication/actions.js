@@ -1,17 +1,13 @@
-/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import qs from 'qs';
 
-import * as ROOTTYPES from './../root/types';
 import * as TYPES from './types';
 import * as Storage from '@/utils/storage';
 
 import { base64Encode } from '@/utils/security';
 
-import api from '@/api';
-
 export default {
-  [TYPES.FETCH_LOGIN]({ commit }, payload) {
+  [TYPES.FETCH_LOGIN]({ commit }) {
     const dummyUser = {
       id: 1,
       name: 'John Doe',
@@ -32,7 +28,7 @@ export default {
     commit(TYPES.SET_STATE, { accessor: 'userData', value: dummyUser });
   },
 
-  [TYPES.FETCH_LOGOUT]({ commit }, payload) {
+  [TYPES.FETCH_LOGOUT]({ commit }) {
     commit(TYPES.SET_STATE, { accessor: 'token', value: '' });
     commit(TYPES.SET_STATE, { accessor: 'userData', value: {} });
 

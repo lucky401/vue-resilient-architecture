@@ -12,7 +12,7 @@ import { extend, ValidationObserver, ValidationProvider } from 'vee-validate';
 
 extend('required', {
   ...required,
-  message: 'Kolom tidak boleh kosong',
+  message: '{_field_} is required',
 });
 
 extend('max', {

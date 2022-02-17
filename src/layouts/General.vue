@@ -3,19 +3,13 @@
     <app-bar-component @toggleDrawer="toggleDrawerHandler" />
     <sidebar-component v-model="isShowDrawer" />
     <v-main class="accent">
-      <v-container>
-        <v-row>
-          <v-col cols="12">
-            <slot />
-          </v-col>
-        </v-row>
-      </v-container>
+      <router-view />
     </v-main>
   </fragment>
 </template>
 
 <script>
-import { Fragment } from 'vue-fragment';
+import { Fragment } from 'vue-frag';
 
 import AppBarComponent from './components/AppBar';
 import SidebarComponent from './components/Sidebar';

@@ -19,7 +19,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: { name: 'summary' },
+      redirect: { name: 'home' },
     },
   ].concat(routes),
 });
@@ -36,7 +36,7 @@ router.beforeEach((to, from, next) => {
   }
 
   if (authenticated && onlyLoggedOut) {
-    return next({ name: 'summary' });
+    return next({ name: 'home' });
   }
 
   document.title = `${meta.title} | ${to.meta.title}`;

@@ -19,11 +19,7 @@ export default {
   },
 
   [TYPES.GET_IS_AUTHENTICATED](state) {
-    if (state.token) {
-      return !!state.token;
-    }
-
-    return !!Storage.getStorage(TYPES.TOKEN_NAME);
+    return !!state.token;
   },
 
   [TYPES.GET_USER_DATA](state) {

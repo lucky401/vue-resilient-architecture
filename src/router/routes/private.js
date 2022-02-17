@@ -1,21 +1,31 @@
+const GeneralLayout = () =>
+  import(
+    /* webpackChunkName: "dashboard.GeneralLayout" */ '@/layouts/General.vue'
+  );
+
 const Home = () =>
   import(/* webpackChunkName: "dashboard.Home" */ '@/views/private/Home.vue');
 
 const routes = [
   {
-    path: '/summary',
-    name: 'summary',
-    component: Home,
-    meta: {
-      title: 'Summary',
-    },
+    path: '',
+    component: GeneralLayout,
+    children: [
+      {
+        path: '/home',
+        name: 'home',
+        component: Home,
+        meta: {
+          title: 'Home',
+        },
+      },
+    ],
   },
 ];
 
 export default routes.map((route) => {
   const meta = {
     public: false,
-    title: route.meta.title,
   };
   return { ...route, meta };
 });
