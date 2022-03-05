@@ -14,7 +14,7 @@
     <v-card width="90%" max-width="408" class="mx-auto" flat outlined>
       <v-card-text class="pt-4">
         <ValidationObserver ref="observer">
-          <v-form :readonly="isLoading">
+          <v-form :readonly="authStatus === 'pending'">
             <p class="body-2 mb-2 secondary--text">Email</p>
             <ValidationProvider
               name="Email"
@@ -53,12 +53,15 @@
             </ValidationProvider>
           </v-form>
         </ValidationObserver>
+
+        <error-alert-component :message="errorMessage" />
+
         <div class="text-center mt-4 mb-4">
           <v-btn
             block
             elevation="0"
             color="secondary darken-2"
-            :loading="isLoading"
+            :loading="authStatus === 'pending'"
             @click="loginHandler"
             rounded
           >
@@ -75,24 +78,41 @@ import { Fragment } from 'vue-frag';
 
 import VuexModule from '@/utils/vuex';
 
+import * as ROOTTYPES from '@/store-namespace/root/types';
 import * as AUTHENTICATIONTYPES from '@/store-namespace/authentication/types';
 
+const rootModule = VuexModule(ROOTTYPES.MODULE_NAME);
 const authenticationModule = VuexModule(AUTHENTICATIONTYPES.MODULE_NAME);
+
+import ErrorAlertComponent from '@/common/components/ErrorAlert';
 
 export default {
   components: {
     Fragment,
+    ErrorAlertComponent,
   },
 
   data() {
     return {
       showPassword: false,
       form: {
-        email: 'test@mail.com',
+        email: 'dev@sentinel.web.id',
         password: '123456',
       },
-      isLoading: false,
     };
+  },
+
+  computed: {
+    ...rootModule.mapState({
+      errorMessage: (state) =>
+        state.errorMessage[AUTHENTICATIONTYPES.FETCH_LOGIN],
+      formErrors: (state) =>
+        state.errors[AUTHENTICATIONTYPES.FETCH_LOGIN] || {},
+    }),
+
+    ...authenticationModule.mapState({
+      authStatus: (state) => state.status.auth,
+    }),
   },
 
   methods: {
@@ -104,8 +124,8 @@ export default {
       const isValid = await this.$refs.observer.validate();
       if (isValid) {
         try {
-          await this.fetchLogin();
-          this.$router.push({ name: 'home' });
+          await this.fetchLogin(this.form);
+          this.$router.push({ name: 'projects' });
         } catch (e) {
           return;
         }

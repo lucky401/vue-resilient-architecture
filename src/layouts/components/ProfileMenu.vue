@@ -18,11 +18,16 @@
             v-on="{ ...tooltip, ...vMenu }"
           >
             <v-avatar color="primary" :size="isBreakpointXS ? 32 : 38">
-              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+              <v-img
+                :src="
+                  profile.avatar || 'https://cdn.vuetifyjs.com/images/john.jpg'
+                "
+                :alt="profile.name"
+              />
             </v-avatar>
           </v-btn>
         </template>
-        <span> John Doe </span>
+        <span> {{ profile.name }} </span>
       </v-tooltip>
     </template>
     <v-card outlined>
@@ -32,8 +37,8 @@
             <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title> John Doe </v-list-item-title>
-            <v-list-item-subtitle> Superadmin </v-list-item-subtitle>
+            <v-list-item-title> {{ profile.name }} </v-list-item-title>
+            <v-list-item-subtitle> {{ profile.role }} </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -78,8 +83,10 @@
 <script>
 import VuexModule from '@/utils/vuex';
 
+import * as ROOTTYPES from '@/store-namespace/root/types';
 import * as AUTHENTICATIONTYPES from '@/store-namespace/authentication/types';
 
+const rootModule = VuexModule(ROOTTYPES.MODULE_NAME);
 const authenticationModule = VuexModule(AUTHENTICATIONTYPES.MODULE_NAME);
 
 export default {
@@ -87,7 +94,21 @@ export default {
     isBreakpointXS() {
       return this.$vuetify.breakpoint.name === 'xs';
     },
+
+    ...rootModule.mapState({
+      errorMessage: (state) =>
+        state.errorMessage[AUTHENTICATIONTYPES.FETCH_LOGOUT],
+    }),
+
+    ...authenticationModule.mapState({
+      authStatus: (state) => state.status.auth,
+    }),
+
+    ...authenticationModule.mapGetters({
+      profile: AUTHENTICATIONTYPES.GET_USER_DATA,
+    }),
   },
+
   methods: {
     ...authenticationModule.mapActions({
       fetchLogout: AUTHENTICATIONTYPES.FETCH_LOGOUT,
@@ -98,7 +119,8 @@ export default {
         await this.fetchLogout();
         this.$router.push({ name: 'login' });
       } catch (e) {
-        return;
+        // eslint-disable-next-line no-console
+        console.error(e);
       }
     },
   },

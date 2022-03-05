@@ -48,29 +48,10 @@
         </v-list-item-content>
       </v-list-item>
     </v-list>
-
-    <template v-slot:append>
-      <v-list nav class="px-0">
-        <v-list-item @click="logoutHandler">
-          <v-list-item-icon>
-            <v-icon>mdi-logout</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title> Logout </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </template>
   </v-navigation-drawer>
 </template>
 
 <script>
-import VuexModule from '@/utils/vuex';
-
-import * as AUTHENTICATIONTYPES from '@/store-namespace/authentication/types';
-
-const authenticationModule = VuexModule(AUTHENTICATIONTYPES.MODULE_NAME);
-
 export default {
   props: {
     value: {
@@ -91,6 +72,12 @@ export default {
               icon: 'mdi-text-box-multiple-outline',
               path: '/home',
             },
+          ],
+        },
+        {
+          name: 'Settings',
+          items: [
+            { title: 'Users', icon: 'mdi-account-multiple', path: '/users' },
           ],
         },
       ],
@@ -115,21 +102,6 @@ export default {
 
   mounted() {
     this.innerValue = this.value;
-  },
-
-  methods: {
-    ...authenticationModule.mapActions({
-      fetchLogout: AUTHENTICATIONTYPES.FETCH_LOGOUT,
-    }),
-
-    async logoutHandler() {
-      try {
-        await this.fetchLogout();
-        this.$router.push({ name: 'login' });
-      } catch (e) {
-        return;
-      }
-    },
   },
 };
 </script>

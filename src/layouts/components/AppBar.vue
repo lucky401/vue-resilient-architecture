@@ -51,6 +51,7 @@ export default {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
     },
+
     ...rootModule.mapState({
       hasAppBarExtension: (state) => state.hasAppBarExtension,
     }),

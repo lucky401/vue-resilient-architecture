@@ -1,10 +1,11 @@
 {
   "env": {
     "environment": "production",
-    "hostname": "https://sentinel.dolphin.web.id",
-    "apiBaseUrl": "https://api-sentinel.dolphin.web.id",
+    "hostname": "https://examole.com",
+    "apiBaseUrl": "https://api.examole.com",
+    "apiKey": "x-api-key",
     "meta": {
-      "title": "Sentinel"
+      "title": "Vue Dashboard"
     }
   }
 }

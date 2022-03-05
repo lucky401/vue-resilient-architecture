@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 import * as Storage from '@/utils/storage';
+import router from '@/router';
 
 const errorPrefix = '[ERROR] ';
 const errorHandler = {
@@ -19,7 +20,7 @@ const errorHandler = {
 
     delete axios.defaults.headers.common.Authorization;
 
-    window.location = '/auth/signout';
+    router.push({ name: 'login' });
   },
 
   notAuthorize() {

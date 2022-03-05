@@ -1,6 +1,6 @@
 module.exports = {
   transpileDependencies: ['vuetify'],
-  publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
+  publicPath: process.env.NODE_ENV !== 'development' ? '/' : '/',
   pwa: {
     workboxPluginMode: 'GenerateSW',
     name: 'Dashboard - Vue.js',

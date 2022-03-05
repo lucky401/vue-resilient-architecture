@@ -6,14 +6,17 @@ import { base64Decode } from '@/utils/security';
 
 export default {
   [TYPES.GET_TOKEN](state) {
+    let token = null;
+
     if (state.token) {
-      return state.token;
+      token = state.token;
+    } else {
+      token = Storage.getStorage(TYPES.TOKEN_NAME);
     }
 
-    const rawToken = Storage.getStorage(TYPES.TOKEN_NAME);
-    if (!rawToken) return null;
+    if (!token) return null;
 
-    const decodeToken = base64Decode(rawToken);
+    const decodeToken = base64Decode(token);
 
     return decodeToken;
   },
@@ -23,14 +26,17 @@ export default {
   },
 
   [TYPES.GET_USER_DATA](state) {
-    if (state.userData) {
-      return state.userData;
+    let user = null;
+
+    if (state.user) {
+      user = state.user;
+    } else {
+      user = Storage.getStorage(TYPES.USER_DATA_NAME);
     }
 
-    const rawUser = Storage.getStorage(TYPES.USER_DATA_NAME);
-    if (!rawUser) return null;
+    if (!user) return null;
 
-    const decodeUser = qs.parse(base64Decode(rawUser));
+    const decodeUser = qs.parse(base64Decode(user));
 
     return decodeUser;
   },

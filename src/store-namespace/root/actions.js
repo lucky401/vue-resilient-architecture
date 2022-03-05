@@ -9,7 +9,7 @@ export default {
       });
     }
 
-    const { data, status, actionName = 'root' } = payload;
+    const { data = {}, status, actionName = 'root' } = payload;
 
     const { error_code, message, errors } = data;
 

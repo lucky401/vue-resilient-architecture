@@ -2,9 +2,10 @@
   "env": {
     "environment": "local",
     "hostname": "http://localhost:8080",
-    "apiBaseUrl": "http://localhost:3000",
+    "apiBaseUrl": "http://localhost:8080",
+    "apiKey": "x-api-key",
     "meta": {
-      "title": "Sentinel"
+      "title": "Vue Dashboard - Local"
     }
   }
 }

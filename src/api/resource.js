@@ -4,10 +4,10 @@ import * as Storage from '@/utils/storage';
 import * as AUTHENTICATION from '@/store-namespace/authentication/types';
 import { base64Decode } from '@/utils/security';
 
-const ENVIRONMENT = process.env.ENVIRONMENT || 'local';
-const CONFIGENVIRONMENT = require(`@/config/${ENVIRONMENT.toLowerCase()}.json`);
+const ENVIRONMENT = process.env.VUE_APP_STAGE || 'local';
+const CONFIG_ENVIRONMENT = require(`@/config/${ENVIRONMENT.toLowerCase()}.json`);
 
-const { apiBaseUrl } = CONFIGENVIRONMENT.env;
+const { apiBaseUrl, apiKey } = CONFIG_ENVIRONMENT.env;
 
 function createResource() {
   const instance = axios.create({
@@ -15,9 +15,8 @@ function createResource() {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
+      'x-api-key': apiKey,
     },
-    withCredentials: true,
   });
 
   instance.interceptors.request.use(

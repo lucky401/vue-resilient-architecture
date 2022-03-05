@@ -1,13 +1,47 @@
 {
-  "name": "sentinel",
+  "name": "vue-resilient-architecture",
+  "title": "Ongoing resilient Frontend architecture 🔥",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Lucky Dewa Satria",
+    "email": "luckydewa123@gmail.com",
+    "url": "https://www.linkedin.com/in/lucky-dewa-satria/"
+  },
+  "bugs": {
+    "email": "luckydewa123@gmail.com",
+    "url": "https://github.com/lucky401/vue_template/issues"
+  },
+  "description": "Ongoing resilient Frontend architecture is meant to help you build production-grade projects using the Vue.js framework.",
+  "keywords": [
+    "Vue boilerplate",
+    "Frontend Architecture"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucky401/vue_template.git"
+  },
+  "engines": {
+    "node": "16",
+    "npm": ">=8"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "VUE_APP_STAGE=production vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "setup": "node setup",
+    "build:staging": "VUE_APP_STAGE=staging vue-cli-service build --mode development",
+    "security:audit": "npm audit",
+    "packages:upgrade": "npm upgrade --latest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "node ./scripts/pre-commit",
+      "pre-push": "node ./scripts/pre-push"
+    }
   },
   "dependencies": {
+    "apexcharts": "^3.33.2",
     "axios": "^0.25.0",
     "core-js": "^3.6.5",
     "minify-css-string": "^1.0.0",
@@ -20,7 +54,10 @@
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.6.2",
     "vue-frag": "^1.4.0",
+    "vue-gauge": "^1.0.3",
     "vue-router": "^3.2.0",
+    "vue-speedometer": "^1.8.0",
+    "vue-svg-gauge": "^1.2.1",
     "vuetify": "^2.4.0",
     "vuex": "^3.4.0"
   },
@@ -36,6 +73,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
+    "husky": "^4.3.8",
     "prettier": "^2.2.1",
     "sass": "~1.32.0",
     "sass-loader": "^10.0.0",
