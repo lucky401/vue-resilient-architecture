@@ -2,10 +2,10 @@ name: validate
 on:
   push:
     branches:
-      - 'main'
+      - "main"
   pull_request:
     branches:
-      - 'main'
+      - "main"
 jobs:
   setup:
     # ignore all-contributors PRs
@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node: [12, 14, 16]
+        node: [16]
     runs-on: ${{ matrix.os }}
     steps:
       - name: ⬇️ Checkout repo
