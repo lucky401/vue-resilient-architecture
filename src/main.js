@@ -27,6 +27,7 @@ import Convert from './plugins/convert';
 import VeeValidate from './plugins/veeValidate';
 import VueApexCharts from './plugins/VueApexCharts';
 import Toast from './plugins/toast';
+import VueCurrencyFilter from './plugins/VueCurrencyFilter';
 
 /* This is a way to print out the version number of the application. */
 import { log } from './utils/console';
@@ -44,11 +45,12 @@ if (environment !== 'production') {
 new Vue({
   router,
   store,
-  vuetify,
   Toast,
   Portal,
   Convert,
+  vuetify,
   VeeValidate,
   VueApexCharts,
+  VueCurrencyFilter,
   render: (h) => h(App),
 }).$mount('#app');
