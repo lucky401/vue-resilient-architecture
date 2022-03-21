@@ -127,7 +127,7 @@ export default {
           await this.fetchLogin(this.form);
           this.$router.push({ name: 'projects' });
         } catch (e) {
-          return;
+          this.$toast.error("Can't login");
         }
       }
     },

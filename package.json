@@ -58,6 +58,7 @@
     "vue-router": "^3.2.0",
     "vue-speedometer": "^1.8.0",
     "vue-svg-gauge": "^1.2.1",
+    "vue-toastification": "^1.7.14",
     "vuetify": "^2.4.0",
     "vuex": "^3.4.0"
   },

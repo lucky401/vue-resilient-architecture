@@ -26,6 +26,7 @@ import vuetify from './plugins/vuetify';
 import Convert from './plugins/convert';
 import VeeValidate from './plugins/veeValidate';
 import VueApexCharts from './plugins/VueApexCharts';
+import Toast from './plugins/toast';
 
 /* This is a way to print out the version number of the application. */
 import { log } from './utils/console';
@@ -44,6 +45,7 @@ new Vue({
   router,
   store,
   vuetify,
+  Toast,
   Portal,
   Convert,
   VeeValidate,
