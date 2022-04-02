@@ -26,7 +26,7 @@ import vuetify from './plugins/vuetify';
 import Convert from './plugins/convert';
 import VeeValidate from './plugins/veeValidate';
 import VueApexCharts from './plugins/VueApexCharts';
-import Toast from './plugins/toast';
+import Toast from './plugins/VueToast';
 import VueCurrencyFilter from './plugins/VueCurrencyFilter';
 
 /* This is a way to print out the version number of the application. */
